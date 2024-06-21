@@ -49,6 +49,40 @@ app.get('/games/:id', (req, res) => {
 
 })
 
+app.put('/games', async (req, res) => {
+
+    const atualDate = new Date();
+    const atualYear = atualDate.getFullYear();
+    const {id, title, price, year} = req.body;
+
+    //price = price.replace(/,/g, '.');
+
+    if(title == undefined || price == undefined || year == undefined) return res.status(400).json({error: "Campos Titulo, Preço e Ano de lançamento precisam ser preenchidos"});
+
+    if (atualYear < year || isNaN(year)) return res.status(400).json({ error: "Ano de lançamento inválido" });
+
+    if (title.length > 255) return res.status(400).json({ error: "Título do jogo supera quantidade de caracteres" });
+
+    if (isNaN(price)) return res.status(400).json({ error: "Preço inválido" });
+
+    try {
+        const game = await Game.findByPk(id);
+
+        game.title = title;
+        game.price = price;
+        game.year = year;
+
+        await game.save();
+        res.status(200).json({message: "Jogo editado com sucesso"});
+
+    console.log(game);
+    } catch (error) {
+        res.status(500).json({error: "Erro no servidor, por favor contatar o suporte"});
+    }
+    
+
+})
+
 app.delete('/games/:id', async (req, res) =>{
 
     const gameId = req.params.id;
