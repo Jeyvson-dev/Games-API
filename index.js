@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 const bodyParser = require("body-parser");
-const connection = require('./database/connection/connection');
 const Game = require('./models/Game');
 
 app.use(bodyParser.urlencoded({
