@@ -1,6 +1,6 @@
 const Game = require('../../models/Game');
 
-class AllGamesController{
+class GameController{
 
     getAllGames(req, res){
 
@@ -17,6 +17,16 @@ class AllGamesController{
     
     }
 
+    saveGame(req, res){
+        let gameTitle = req.body.title;
+        let gameYear = req.body.year;
+        let gamePrice = (req.body.price).replace(/,/g, '.');
+
+        if(gameTitle.length > 255) res.status(422).json({error: "Quantidade de caracteres inválida"})
+
+        console.log(gamePrice);
+    }
+
 }
 
-module.exports = new AllGamesController();
+module.exports = new GameController();

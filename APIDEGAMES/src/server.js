@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 const bodyParser = require("body-parser");
-const gamesRoutes = require('./src/http/routes');
+const gamesRoutes = require('./http/routes');
 
 app.use(bodyParser.urlencoded({
     extended: false
