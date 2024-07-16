@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.use('/api', gamesRoutes);
+app.use('', gamesRoutes);
 
 
 app.listen(PORT, () => {
